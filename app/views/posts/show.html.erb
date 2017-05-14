@@ -1,0 +1,82 @@
+
+<div class="page-container">
+<!-- <div class="right-float"> -->
+	<div class="chip">
+		<table>
+			<tr>
+				<% if current_user %>
+					<%= form_tag "/favorites", method: :post do %>
+						<input type="hidden" name="input_post_id" value="<%= @post.id %>">
+					<!-- <button type="submit" class="btn btn-success fa fa-heart"> -->
+						<button type="submit" value="Add to favorites" class="btn btn-success glyphicon glyphicon-heart">
+							<!-- <span class="fa fa-heart" aria-hidden="true"></span> -->
+						</button>
+					<% end %>
+				<% end %>
+
+				<% if current_user && current_user.admin%>
+					<%= form_tag "/posts/#{@post.id}", method: :delete,
+								data: {confirm: "Are you sure?"} do %> 
+						<button type="submit" class="btn btn-danger glyphicon glyphicon-trash" >
+			  				<!-- <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> -->
+						</button>
+					<% end %>
+				<% end %>
+
+					<% if current_user %>
+						<a type="submit"  href="/posts/<%= @post.id %>/edit" 
+								class="btn btn-warning glyphicon glyphicon-edit"></a>
+				<% end %>
+			</tr>
+		</table>
+
+		Post Id:<%= @post.id %>
+		<td><h2><%= @post.title %></h2></td>
+		<h3>Ingredients:</h3> <h5><%=@post.ingredients %></h5>
+		<h3>Details:</h3><h5> <%= @post.post_text %></h5>
+		<br>
+		Author: <%= @post.user.first_name %>
+		<br>
+		Created: <%= @post.created_at.strftime("%m/%d/%y-%I:%M%p") %>
+		<br>
+
+	</div>
+
+	<div class="chip">
+		<h2>Comments:</h2>
+		<h4> <%=@comments.length %> Comments </h4>
+		<h3> Add Comment </h3>
+
+		<!-- COMMENTS INPUT -->
+		<div class="row col-md-12">
+			<div class="col-md-4">
+		    	<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="Contact Person"> <%= current_user.first_name %>
+		    </div>
+		    
+		    <div class="col-md-8">
+			 	<%= form_tag "/comments", method: :post do %>
+					<!-- Comment Text:  -->
+					<input type="hidden" class="form-control" value="<%= @post.id %>" name="input_post_id">
+					<br>
+
+					<input type="text" class="form-control" placeholder="Join the Discussion" name="input_post_comment">
+					<!-- <button type="submit" class="btn btn-success" onclick="window.location.reload()">Comment</button> -->
+					<button class="btn btn-success" onclick="window.location.reload()">Comment</button>
+				<% end %>
+				<br>
+			</div>
+		</div>
+				<!-- <input type="submit" class="btn btn-success" value="Comment" v-on:click="comment"> -->
+		<!-- / COMMENTS INPUT -->
+
+			<% @post.comments.each do |comment| %>
+				<div class="comments_div-p-2" id="comments_div">
+					<%= comment.comment_text %>
+				</div>
+			<% end %>
+	</div>
+</div>
+
+
+
+

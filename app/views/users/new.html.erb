@@ -1,0 +1,37 @@
+
+<div class="container">
+
+<%= form_tag '/users', method: :post do  %>
+
+<div class="md-form">
+    <input type="text" id="form1" class="form-control">
+    <label for="form1" class="">Example label</label>
+</div>
+
+  <div>
+    First Name:
+    <input type="text" name="input_first_name">
+  </div>
+    <div>
+    Last Name:
+    <input type="text" name="input_last_name">
+  </div>
+
+  <div>
+    Email:
+    <input type="email" name="input_email">
+  </div>
+
+  <div>
+    Password:
+    <input type="password" name="input_password">
+  </div>
+
+  <div>
+    Confirm Password:
+    <input type="password" name="input_password_confirmation">
+  </div>
+
+  <input type="submit" value="Submit">
+<% end %>
+</div>

@@ -1,0 +1,39 @@
+<div class="page-container">
+	<h3> Index Page</h3>
+	<% @posts.each do |post| %>
+		<div class="chip col-lg-12 col-md-12 col-sm-12">
+		    <!-- <div class=""> -->
+	            <div class="col-lg-3 col-md-3 col-sm-3">
+	                <!-- <div class="avatar"> -->
+		                <a href= "/posts/<%= post.id %>" >
+		  		          <% if post.images.first.img_url == nil %>
+		  		          <img class="rounded-top img-fluid" id="index_thumb" src="no_image.jpeg" alt="No image available">
+		  		          <% else %>
+		                 <img class="rounded-top img-fluid" id="index_thumb" src="<%= post.images.first.img_url %>" alt="No image available">
+		                 <% end %>
+		                 </a>
+	                    <!-- <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(10).jpg"> -->
+	                <!-- </div> -->
+	            </div>
+
+	            <div class="col-lg-9 col-md-9 col-sm-9">
+	                <h4><a href="posts/<%= post.id %>"><%= post.title %></a></h4>
+	                <h6><%= post.post_text %></h6>
+	                <br>
+	                <h7>Author: <%= post.user.first_name %></h7>
+	                <br>
+	                <h7>Remedy Origin: "country"</h7>
+	                <br>
+	                <h7>Comments: <%= post.comments.length %></h7>
+				</div>
+		                <!--Facebook-->
+		                <!-- <a class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a> -->
+		                <!--Pinterest-->
+		                <!-- <a class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a> -->
+		                <!--Instagram-->
+		                <!-- <a class="icons-sm ins-ic"><i class="fa fa-instagram"> </i></a> -->
+		       
+			</div>
+		
+	<% end %>
+</div>

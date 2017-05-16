@@ -30,7 +30,7 @@
 			</tr>
 		</table>
 
-		Post Id:<%= @post.id %>
+		<!-- Post Id:<%= @post.id %> -->
 		<td><h2><%= @post.title %></h2></td>
 		<h3>Ingredients:</h3> <h5><%=@post.ingredients %></h5>
 		<h3>Details:</h3><h5> <%= @post.post_text %></h5>
@@ -50,8 +50,10 @@
 		<!-- COMMENTS INPUT -->
 		<div class="row col-md-12">
 			<div class="col-md-4">
-		    	<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="Contact Person"> <%= current_user.first_name %>
+			<a href="/users/1">
+		    	<img src="<%= @post.user.photo %>" alt="Contact Person"> <%= @post.user.first_name %>
 		    </div>
+		    </a>
 		    
 		    <div class="col-md-8">
 			 	<%= form_tag "/comments", method: :post do %>

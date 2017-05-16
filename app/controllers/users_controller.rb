@@ -6,14 +6,21 @@ class UsersController < ApplicationController
 
 	def new
 	end
+	def show
+		@user = User.all
+		user_id = params[:id]
+		@user = User.find_by(id: user_id)
+	end
+
 
 	def create 
-		@user = User.new(first_name: params[:input_first_name],
+		@user = User.new(user_name: params[:input_user_name],first_name: params[:input_first_name],
 						last_name: params[:input_last_name],
 						email: params[:input_email],
 						admin: false,
 						password: params[:input_password], 
-						password_confirmation: params[:input_password_conformation])
+						password_confirmation: params[:input_password_conformation], 
+						photo: params[:inpt_profile_img_url])
 
 			
 		if @user.save 

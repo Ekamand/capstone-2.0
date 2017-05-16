@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 		@post = Post.new(title: params[:input_title],
 							post_text: params[:input_text],
 							ingredients: params[:input_ingredients],
-							user_id: params[:user_id])
+							user_id: params[:user_id], origin: params[:input_origin])
 
 
 		if @post.save
@@ -33,6 +33,7 @@ class PostsController < ApplicationController
 		def show
 		@post = Post.all
 		@comments = Comment.all
+		@user = User.all
 		# @order = @order.find_by(id:)
 		post_id = params[:id]
 		@post = Post.find_by(id: post_id)
@@ -58,12 +59,13 @@ class PostsController < ApplicationController
 	def update
 		post_id = params[:id]
 		@post = Post.find_by(id: post_id)
+		@image = Image.find_by(post_id: post_id)
 		@post.update(title: params[:input_title],
 							post_text: params[:input_text],
 							ingredients: params[:input_ingredients],
-							user_id: params[:user_id])
+							user_id: params[:user_id], origin: params[:input_origin])
 		puts "*" *5 + " post updated"
-		@image = Image.update(img_url: params[:img_url], post_id: post_id)
+		@image.update(img_url: params[:img_url])
 		puts "*" *5 + " image updated"
 		if @post.save && @image.save
 	  		flash[:success] = "Post updated successfully!"

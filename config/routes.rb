@@ -13,7 +13,10 @@ Rails.application.routes.draw do
 
 	get "/signup" => "users#new"
 
+	get "/users/:id" => "users#show"
 	post "/users" => "users#create"
+	get "/users/:id/edit" => "users#edit"
+	patch "/users/:id" => "users#update"
 
 	get "/login" => "sessions#new"
 	post "/login" => "sessions#create"

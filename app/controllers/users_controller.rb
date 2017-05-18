@@ -8,9 +8,20 @@ class UsersController < ApplicationController
 	end
 	def show
 		@user = User.all
+		@post = Post.all
+		@follows = Following.all
 		user_id = params[:id]
 		@user = User.find_by(id: user_id)
 	end
+
+	def update
+		
+	end
+		def edit
+		user_id = params[:id]
+		@user = User.find_by(id: user_id)
+	end
+
 
 
 	def create 

@@ -51,7 +51,11 @@
 		<div class="row col-md-12">
 			<div class="col-md-4">
 			<a href="/users/1">
-		    	<img src="<%= @post.user.photo %>" alt="Contact Person"> <%= @post.user.first_name %>
+				<div class="avatar">
+		    	<img src="<%= @post.user.photo %>" alt="Contact Person" 
+		    		class="rounded-circle img-responsive"> <%= @post.user.first_name %>
+		    </div>
+		    </a>
 		    </div>
 		    </a>
 		    

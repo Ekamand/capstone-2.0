@@ -1,50 +1,56 @@
+<div class="flex-center animated fadeIn">
+  <div class="col-md-4 ">
+    <div class="card card-cascade ">
+      <!-- <div class="container">  -->
+      <div class="card-block text-left">
 
-<div class="container">
 
-<%= form_tag '/users', method: :patch do  %>
+      <%= form_tag "/users/#{@user.id}", method: :patch do  %>
+
+        <div class="md-form">
+          <input type="text" name="input_first_name" value="<%= @user.first_name %>" id="form1">
+          <label for="form1" class="">First Name</label>
+        </div>
+
+        <div class="md-form">
+          <input type="text" name="input_last_name" value="<%= @user.last_name %>" id="form2">
+          <label for="form2" class="">Last Name</label>
+        </div>
+<!--   <div>
+First Name:
+<input type="text" name="input_first_name" value="<%= current_user.first_name %>">
+</div> -->
+<!--     <div>
+Last Name:
+<input type="text" name="input_last_name" value="<%= current_user.last_name %>">
+</div> -->
 
 <div class="md-form">
-    <input type="text" name="input_first_name" value="<%= current_user.first_name %>" id="form1">
-    <label for="form1" class="">First Name</label>
+  <input type="text" name="input_last_name" value="<%= @user.email %>" id="form3">
+  <label for="form3" class="">Email Address</label>
+</div>
+
+<!--   <div>
+Email:
+<input type="email" name="input_email" value="<%= current_user.email %>">
+</div> -->
+<div class="md-form">
+  <input type="text" name="input_last_name" value="<%= @user.photo %>" id="form4">
+  <label for="form4" class="">Photo URL</label>
 </div>
 
 <div class="md-form">
-<input type="text" name="input_last_name" value="<%= current_user.last_name %>" id="form2">
-<label for="form2" class="">Last Name</label>
-</div>
-<!--   <div>
-    First Name:
-    <input type="text" name="input_first_name" value="<%= current_user.first_name %>">
-  </div> -->
-<!--     <div>
-    Last Name:
-    <input type="text" name="input_last_name" value="<%= current_user.last_name %>">
-  </div> -->
-
-  <div class="md-form">
-<input type="text" name="input_last_name" value="<%= current_user.email %>" id="form3">
-<label for="form3" class="">Email Address</label>
-</div>
-
-<!--   <div>
-    Email:
-    <input type="email" name="input_email" value="<%= current_user.email %>">
-  </div> -->
-    <div class="md-form">
-<input type="text" name="input_last_name" value="<%= current_user.photo %>" id="form4">
-<label for="form4" class="">Photo URL</label>
-</div>
-
-    <div class="md-form">
-<input type="text" name="Input_bio" value="Bio Place holders" id="form5">
-<label for="form5" class="">Bio</label>
+  <input type="text" name="Input_bio" value="Bio Place holders" id="form5">
+  <label for="form5" class="">Bio</label>
 </div>
 
 <!--     <div>
-    Photo URL:
-    <input type="email" name="input_profile_img_url" value="<%= current_user.photo %>">
-  </div> -->
+Photo URL:
+<input type="email" name="input_profile_img_url" value="<%= current_user.photo %>">
+</div> -->
 
-  <input type="submit" value="Submit">
+<input type="submit" value="Submit">
 <% end %>
+</div>
+</div>
 </div>

@@ -1,56 +1,112 @@
-<h1> <%= @user.first_name %>'s Profile </h1>
-<div class="profile">
+<div class="profile-page-container">
+    <div class="row">
+        <div class="flex-center animated fadeIn">
+            <div class="col-md-4">
+                    <!--Card-->
+                <div class="card card-cascade ">
+                        <!--Card image-->
+                        <div class="view overlay hm-white-slight">
+                            <img src="<%= @user.photo %>"
+                            	class="card-face_avatar" alt="">
+                                <a>
+                                    <div class="mask waves-effect waves-light"></div>
+                                </a>
+                        </div>
+                        <!--Card content-->
+                        <div class="card-block text-left">
+                            <!--Title-->
+                            <h4 class="card-title"><strong><%= @user.first_name %> <%= @user.last_name %></strong></h4>
+                            <h5>Web developer</h5>
 
+                            <p class="card-text">
+                            following: 
+                            <br>
+                            followers: <%= @user.followers.length %>
+                            <br>
+                                User Name: <%= @user.user_name %>
+                                <br>
+                	            First Name: <%= @user.first_name%>
+                				<br>
+                				Last Name: <%= @user.last_name%>
+                				<br>
+                				Email Address: <%= @user.email %>
+                            </p>
 
+                            <!--Facebook-->
+                            <a href="www.facebook.com" class="btn-floating btn-small btn-fb"><i class="fa fa-facebook"></i></a>
+                            <!--Twitter-->
+                            <a href="www.facebook.com" type="button" class="btn-floating btn-small btn-tw"><i class="fa fa-twitter"></i></a>
+                            <!--Google +-->
+                            <a type="button" class="btn-floating btn-small btn-gplus"><i class="fa fa-google-plus"></i></a>
+                        </div>
 
-    <div class="flex-center animated fadeIn">
-    	<div class="col-md-4 ">
+                            <div class="row-align-center">
+                                <% if @user.id != current_user.id %> 
+                                    <form action="/users/<%= @user.id %>/edit" class="text-right">
+                                    	<input type="hidden" value="Edit Profile" class="btn btn-primary">
+                                    </form>
+                                    <% else %>
+                                    <form action="/users/<%= @user.id %>/edit" class="text-right">
+                                        <input type="submit" value="Edit Profile" class="btn btn-primary">
+                                    </form>
+                                <% end %>
 
-            <!--Card-->
-            <div class="card card-cascade ">
-                <!--Card image-->
-                <div class="view overlay hm-white-slight">
-                    <img src="<%= @user.photo %>"
-                    	class="img-fluid" alt="">
-                    <a>
-                        <div class="mask waves-effect waves-light"></div>
-                    </a>
+                                <% if @user.id != current_user.id %> 
+                                    <form action="#" class="text-right">
+                                        <input type="submit" value="Follow User" class="btn btn-primary">
+                                    </form>
+                                <% else %>
+                                    <form action="#" class="text-right">
+                                        <input type="hidden" value="Follow User" class="btn btn-primary">
+                                    </form>
+                                <% end %>
+                            </div>
                 </div>
-                <!--Card content-->
-                <div class="card-block text-left">
-                    <!--Title-->
-                    <h4 class="card-title"><strong><%= @user.first_name %> <%= @user.last_name %></strong></h4>
-                    <h5>Web developer</h5>
+            </div>
+        
 
-                    <p class="card-text">
-                        User Name: <%= @user.user_name %>
-                        <br>
-        	            First Name: <%= @user.first_name%>
-        				<br>
-        				Last Name: <%= @user.last_name%>
-        				<br>
-        				Email Address: <%= @user.email %>
-                    </p>
-
-                    <!--Facebook-->
-                    <a href="www.facebook.com" class="btn-floating btn-small btn-fb"><i class="fa fa-facebook"></i></a>
-                    <!--Twitter-->
-                    <a href="www.facebook.com" type="button" class="btn-floating btn-small btn-tw"><i class="fa fa-twitter"></i></a>
-                    <!--Google +-->
-                    <a type="button" class="btn-floating btn-small btn-gplus"><i class="fa fa-google-plus"></i></a>
-                    <div class="row">
-                    <form action="/users/<%= @user.id %>/edit" class="text-right">
-                    	<input type="submit" value="Edit Profile" class="btn btn-primary"></button>
-                    </form>
-                    <form action="#" class="text-right">
-                        <input type="submit" value="Follow User" class="btn btn-primary"></button>
-                    </form>
+        <div class="col-md-8">
+            <% @user.posts.each do |post| %>
+            <!--Panel-->
+                <div class="card card-block">
+                    <h3 class="card-title"><%= post.title %></h3>
+                    <p class="card-text"><%= post.post_text %></p>
+                    <div class="flex-row">
+                        <a href="/posts/<%= post.id %>" class="card-link">Read more</a>
+                        
                     </div>
                 </div>
-            <!--/.Card content-->
+
+            <% end %>
         </div>
-    </div>
 </div>
+    </div> <!-- End of row -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 

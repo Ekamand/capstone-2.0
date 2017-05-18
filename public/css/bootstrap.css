@@ -4419,7 +4419,7 @@ tbody.collapse.show {
   -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
-  padding: 1.25rem;
+  padding: 10.25rem;
 }
 
 .card-title {

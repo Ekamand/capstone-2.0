@@ -1,0 +1,21 @@
+<% @favorites.each do |favorite| %>
+	<div class="well">
+	<div class="right-float">
+		<%= form_tag "/favorites/#{favorite.id}", method: :delete,
+						data: {confirm: "Are you sure?"} do %> 
+			<button type="submit" class="btn btn-danger glyphicon glyphicon-remove"></button>
+				<!-- <input type="submit" class="btn btn-danger glyphicon glyphicon-remove" value="Remove Favorite"> -->
+			</button>
+		<% end %>
+		</div>
+		<br>
+	<!-- <br /> -->
+	Post Title: <a href="posts/<%= favorite.post.id %>"><%= favorite.post.title %></a>
+	<br />
+	Post Text: <%= favorite.post.post_text %>
+	<br />
+	Written By: <%= favorite.user.first_name %>
+
+
+		</div>
+<% end %>

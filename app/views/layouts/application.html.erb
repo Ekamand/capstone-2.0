@@ -72,7 +72,9 @@
                 <li class="nav-item">
                     <a href="/posts/new" class="nav-link">New</a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="/favorites" class="nav-link">Favorites</a>
+                </li>
 <!--                 <li class="nav-item">
                     <a class="nav-link">Pricing</a>
                 </li> -->
@@ -86,19 +88,39 @@
                 </li>
             </ul>
             <!-- SEARCH -->
+            <%= form_tag "/search", :class=>"navbar-form navbar-right", method: :post do %>
             <form class="form-inline waves-effect waves-light">
-                <input class="form-control" type="text" placeholder="Search">
+                <input class="form-control" type="text" placeholder="Search" name="search_term">
             </form>
+            <% end %> 
             <!-- / SEARCH -->
 
             <!-- LOGIN / LOGOUT BUTTON -->
-            <ul class="nav navbar-nav navbar-right">
+
+                <li class="nav-item dropdown btn-group">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+                    <div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item">Following</a>
+                        <!-- <a class="dropdown-item"> -->
+                            <% if current_user %> 
+                        <a class="dropdown-item" href="/users/<%= current_user.id %>">My Profile</a>
+                              <a class="dropdown-item" href="/logout" class="nav-link">Logout <%= current_user.first_name %></a></li>
+                            <% else %> 
+                              <a class="dropdown-item" href="/login" class="nav-link">Login</a></li>
+                            <% end %>
+                        <!-- </a> -->
+                    </div>
+                </li>
+
+
+
+<!--             <ul class="nav navbar-nav navbar-right">
                 <% if current_user %> 
                   <li><a href="/logout" class="nav-link">Logout <%= current_user.first_name %></a></li>
                 <% else %> 
                   <li><a href="/login" class="nav-link">Login</a></li>
                 <% end %>
-            </ul>
+            </ul> -->
         </div>
     </div>
 </nav>

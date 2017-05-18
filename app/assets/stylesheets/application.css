@@ -14,12 +14,46 @@
  *= require_self
  */
 
+    // user avatar element
+    .card-face_avatar {
+    display: block;
+    width: 110px;
+    height: 110px;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    transform: scale(1.2,1.2);
+    opacity: 0;
+    animation: avatar 1.5s;
+    animation-delay: 200ms;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.230, 1.000, 0.320, 1.000);
+
+        img {
+        border-radius: 50%; }
+    }
+
+ .card-block {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  margin-bottom: 10px;
+}
+
  .page-container {
   position: relative;
   margin-left: auto;
   margin-right: auto;
   padding-right: 15px;
   padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.profile-page-container {
+	  position: relative;
+  margin-left: 50px;
+  margin-right: 50px;
   padding-top: 15px;
   padding-bottom: 15px;
 }

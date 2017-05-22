@@ -10,4 +10,17 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+//= require jquery_ujs
 //= require_tree .
+//= require materialize
+
+$(document).ready(function){
+	$(".dropdown-button").dropdown();
+
+	$('.post_text').ThreeDots({ max_rows:1 });
+
+
+});
+
+

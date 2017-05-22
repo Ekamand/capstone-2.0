@@ -1,9 +1,9 @@
-<div class="container, control-label col-sm-12">
-  <div class="col-lg-12"> 
-    <div class="well">   
-      <div class="item">
 
-      <% if @post.errors.any? %>
+<div class="row center">
+  <div class="col s12 m8">
+    <div class="card white-grey">
+      <div class="card-content black-text">
+            <% if @post.errors.any? %>
       <div>
       <%= pluralize(@post.errors.count, "error") %>
       <ul>
@@ -15,58 +15,77 @@
   </div>
   <% end %>
 
- <center><h2 class="page_title">Create a New post</h2></center>
- <%= form_tag "/posts", method: :post do %>
+        <span class="card-title">Card Title</span>
+        <%= form_tag "/posts", method: :post do %>
 
-                <div class="form-group">
-                  <label class="control-label col-sm-3">Post Title:</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" name="input_title" 
-                     ><br>
-                  </div>
-                </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="input_title" type="text"  name="input_title">
+            <input type="hidden" class="form-control"  name="user_id" value="<%= current_user.id %>">
+            <label for="input_title">Post Title:</label>
+          </div>
+        </div>
 
-                    <div class="form-group">
-                  <label class="control-label col-sm-3">Remedy Ingridents</label>
-                  <div class="col-sm-9">
-                    <textarea type="text" class="form-control" name="input_ingredients" rows="5"
-                    ></textarea><br>
-                  </div>
-                </div>
+        <div class="row">
+              <div class="input-field col s12">
+                <textarea id="input_text" type="text" class="materialize-textarea" name="input_text"></textarea>
+                <label for="input_text">Details:</label>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="input_ingredients" type="text" class="materialize-textarea" name="input_ingredients"></textarea>
+                <label for="input_ingredients">Ingredients:</label>
+              </div>
+            </div>
+          
+                <div class="row">
+              <div class="input-field col s12">
+                <textarea id="input_directions" type="text" class="materialize-textarea" name="input_directions"></textarea>
+                <label for="input_directions">Directions:</label>
+              </div>
+            </div>
 
-                    <div class="form-group">
-                  <label class="control-label col-sm-3">Text</label>
-                  <div class="col-sm-9">
-                    <textarea type="text" class="form-control" name="input_text" rows="5"
-                    ></textarea><br>
-                  </div>
-                </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="img_url" type="text" name="img_url">
+            <label for="img_url">Image URL:</label>
+          </div>
+        </div>
 
-                <div class="form-group">
-                  <label class="control-label col-sm-3"></label>
-                  <div class="col-sm-9">          
-                    <input type="hidden" class="form-control"  name="user_id" value="<%= current_user.id %>">
-                  <br></div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-3">Image URL</label>
-                  <div class="col-sm-9">          
-                    <input type="text" class="form-control"  name="img_url">
-                  <br></div>
-                </div>
+                <div class="row">
+          <div class="input-field col s12">
+            <input id="input_origin" type="text" name="input_origin">
+            <label for="input_origin">Origin:</label>
+          </div>
+        </div>
 
-                <div class="form-group">
-                  <label class="control-label col-sm-3">Origin</label>
-                  <div class="col-sm-9">          
-                    <input type="text" class="form-control"  name="input_origin">
-                  <br></div>
-                </div>
-                <center><input type="submit" class="btn btn-info" value ="Add Item" ></center>
-
- <% end %>
+            </div>
+            <div class="card-action">
+                <center><button type="submit" class="btn waves-effect waves-light" value ="Add Item" >Submit
+                  <i class="material-icons right">send</i>
+                  </button>
+                  </center>
+                   <% end %>
+              <!-- <a href="#">This is a link</a> -->
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -2,8 +2,8 @@ class PostsController < ApplicationController
 
 	before_action :authenticate_user!, except: [:index, :show, :search]
 
-	def user_posts
-		
+	def feed
+		# @following = User.following
 	end
 
 	def index
@@ -21,25 +21,33 @@ class PostsController < ApplicationController
 
 
 		if @post.save
-	  		flash[:success] = "Post created successfully!"
-	  		puts "post saved **********"
-	  		puts @post.id
-		# @image = Image.create(img_url: params[:img_url], post_id: @post.id)
-	  		redirect_to "/posts/#{@post.id}"
-	  	else
-	  		flash[:danger] = "item could not be created!"
-	  		render "new.html.erb"
-	  end
+		  		flash[:success] = "Post created successfully!"
+		  		puts "post saved **********"
+		  		puts @post.id
+		  	if params[:img_url]
+					@image = Image.create(img_url: params[:img_url], post_id: @post.id)
+			end
+				# @country = Geocoder.coordinates(params[:input_origin])
+			# @image = Image.new(img_url: params[:img_url], post)
+		  		redirect_to "/posts/#{@post.id}"
+		  	else
+		  		flash[:danger] = "item could not be created!"
+		  		render "new.html.erb"
+	  	end
 	 	 # post_id = params[:id]
 	end
 
-		def show
+	def show
 		@post = Post.all
 		@comments = Comment.all
 		@user = User.all
 		# @order = @order.find_by(id:)
 		post_id = params[:id]
 		@post = Post.find_by(id: post_id)
+
+		post_origin = @post.origin
+		@latlng = Geocoder.coordinates(post_origin)
+
 	end
 
 	def new 
@@ -71,12 +79,12 @@ class PostsController < ApplicationController
 		@image.update(img_url: params[:img_url])
 		puts "*" *5 + " image updated"
 		if @post.save && @image.save
-	  		flash[:success] = "Post updated successfully!"
-	  		redirect_to "/posts/#{@post.id}"
-	 	 else
-	  		flash[:danger] = "item could not be updated!"
-	  		# render "new.html.erb"
-	  end
+		  		flash[:success] = "Post updated successfully!"
+		  		redirect_to "/posts/#{@post.id}"
+		 	else
+		  		flash[:danger] = "item could not be updated!"
+		  		# render "new.html.erb"
+		end
 	end
 
 	def destroy

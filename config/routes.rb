@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 	post "/users" => "users#create"
 	get "/users/:id/edit" => "users#edit"
 	patch "/users/:id" => "users#update"
+	get "/users/:id/followings" => "followings#index"
 	
   	post "/search" => "posts#search"
     get "/search" => "posts#search"
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
 	post "/posts" => "posts#create"
 	get "/posts/:id" => "posts#show"
 	# get "/users/:id/posts" => ""
-
+	get "/feed" => "posts#feed"
 	get "/signup" => "users#new"
 
 	

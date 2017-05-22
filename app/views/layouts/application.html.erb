@@ -1,130 +1,102 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+<head>
+<!--   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge"> -->
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  
+
+  <!-- <%= stylesheet_link_tag "/stylesheets/application.css" %> -->
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  <title>CapstoneProject</title>
+  <%= csrf_meta_tags %>
+
+  
+</head>
+<!-- <body style="background-image: url('http://encompasshealthcare.com/wp-content/uploads/2013/08/Chinese-Herbs.jpg')"> -->
+<body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+  <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+
+
+  <!-- Dropdown Structure -->
+  <ul id="dropdown1" class="dropdown-content">
+    <% if current_user %> 
+    <li><a href="/users/<%= current_user.id %>">My Profile</a></li>
+    <li><a href="/users/<%= current_user.id %>/followings">Following</a></li>
+    <% end %>
+    <li class="divider"></li>
+    <% if current_user %> 
+    <li><a href="/logout">Logout</a></li>
+    <% else %>
+    <li><a href="/login">Login</a></li>
+    <% end %>
+
+  </ul>
+
+
+  <div class="navbar-fixed">
+
+    <nav>
+      <div class="blue-grey darken-2 nav-wrapper">
+        <a href="#!" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/index">Home</a></li>
+          <li><a href="/posts/new">New</a></li>
+          <li><a href="/favorites">favorites</a></li>
+          <!-- Dropdown Trigger -->
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 
 
 
 
-      <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <%= yield %>
 
-  <!-- Bootstrap Material Design -->
-  <link rel="stylesheet" type="text/css" href="dist/css/bootstrap-material-design.css">
-  <link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css">
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large red" href="/posts/new">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+  </div>
 
-
-
-
-
-
-        <!-- Font Awesome -->
-    <link rel="/stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="/css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="/css/style.css" rel="stylesheet">
-
-    <title>CapstoneProject</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-  </head>
-
-  <body>
-    
-    <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="/js/tether.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="/js/mdb.min.js"></script>
-
-
-
-
-
-    <!--Navbar-->
-<nav class="navbar navbar-toggleable-md navbar-dark bg-primary">
+  <footer class="page-footer">
     <div class="container">
-
-<!--         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1"           aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button> -->
-        <a class="navbar-brand" href="/index">
-            <strong>Capstone</strong>
-        </a>
-        <div class="collapse navbar-collapse" id="navbarNav1">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a href="/index" class="nav-link">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="/posts/new" class="nav-link">New</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/favorites" class="nav-link">Favorites</a>
-                </li>
-<!--                 <li class="nav-item">
-                    <a class="nav-link">Pricing</a>
-                </li> -->
-                <li class="nav-item dropdown btn-group">
-                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
-                        <a class="dropdown-item">Action</a>
-                        <a class="dropdown-item">Another action</a>
-                        <a class="dropdown-item">Something else here</a>
-                    </div>
-                </li>
-            </ul>
-            <!-- SEARCH -->
-            <%= form_tag "/search", :class=>"navbar-form navbar-right", method: :post do %>
-            <form class="form-inline waves-effect waves-light">
-                <input class="form-control" type="text" placeholder="Search" name="search_term">
-            </form>
-            <% end %> 
-            <!-- / SEARCH -->
-
-            <!-- LOGIN / LOGOUT BUTTON -->
-
-                <li class="nav-item dropdown btn-group">
-                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
-                    <div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
-                        <a class="dropdown-item">Following</a>
-                        <!-- <a class="dropdown-item"> -->
-                            <% if current_user %> 
-                        <a class="dropdown-item" href="/users/<%= current_user.id %>">My Profile</a>
-                              <a class="dropdown-item" href="/logout" class="nav-link">Logout <%= current_user.first_name %></a></li>
-                            <% else %> 
-                              <a class="dropdown-item" href="/login" class="nav-link">Login</a></li>
-                            <% end %>
-                        <!-- </a> -->
-                    </div>
-                </li>
-
-
-
-<!--             <ul class="nav navbar-nav navbar-right">
-                <% if current_user %> 
-                  <li><a href="/logout" class="nav-link">Logout <%= current_user.first_name %></a></li>
-                <% else %> 
-                  <li><a href="/login" class="nav-link">Login</a></li>
-                <% end %>
-            </ul> -->
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Footer Content</h5>
+          <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
         </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-</nav>
+    <div class="footer-copyright">
+      <div class="container">
+        © 2014 Copyright Text
+        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+      </div>
+    </div>
+  </footer>
 
-<%= yield %>
-  </body>
+</body>
 </html>

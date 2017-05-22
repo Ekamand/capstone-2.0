@@ -1,87 +1,80 @@
-<div class="profile-page-container">
-    <div class="row">
-        <div class="flex-center animated fadeIn">
-            <div class="col-md-4">
-                    <!--Card-->
-                <div class="card card-cascade ">
-                        <!--Card image-->
-                        <div class="view overlay hm-white-slight">
-                            <img src="<%= @user.photo %>"
-                            	class="card-face_avatar" alt="">
-                                <a>
-                                    <div class="mask waves-effect waves-light"></div>
-                                </a>
-                        </div>
-                        <!--Card content-->
-                        <div class="card-block text-left">
-                            <!--Title-->
-                            <h4 class="card-title"><strong><%= @user.first_name %> <%= @user.last_name %></strong></h4>
-                            <h5>Web developer</h5>
+<div class="row">
+    <div class="col s12 m4">
+        <div class="card">
 
-                            <p class="card-text">
-                            following: 
-                            <br>
-                            followers: <%= @user.followers.length %>
-                            <br>
-                                User Name: <%= @user.user_name %>
-                                <br>
-                	            First Name: <%= @user.first_name%>
-                				<br>
-                				Last Name: <%= @user.last_name%>
-                				<br>
-                				Email Address: <%= @user.email %>
-                            </p>
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="<%= @user.photo %>">
+            </div>
 
-                            <!--Facebook-->
-                            <a href="www.facebook.com" class="btn-floating btn-small btn-fb"><i class="fa fa-facebook"></i></a>
-                            <!--Twitter-->
-                            <a href="www.facebook.com" type="button" class="btn-floating btn-small btn-tw"><i class="fa fa-twitter"></i></a>
-                            <!--Google +-->
-                            <a type="button" class="btn-floating btn-small btn-gplus"><i class="fa fa-google-plus"></i></a>
-                        </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4"><%= @user.first_name %>
+                    <i class="material-icons right">more_vert</i>
+                </span>
+                    <p><a href="#">This is a link</a></p>
+            </div>
 
-                            <div class="row-align-center">
-                                <% if @user.id != current_user.id %> 
-                                    <form action="/users/<%= @user.id %>/edit" class="text-right">
-                                    	<input type="hidden" value="Edit Profile" class="btn btn-primary">
-                                    </form>
-                                    <% else %>
-                                    <form action="/users/<%= @user.id %>/edit" class="text-right">
-                                        <input type="submit" value="Edit Profile" class="btn btn-primary">
-                                    </form>
-                                <% end %>
+            <div class="card-reveal activator">
+                <span class="card-title grey-text text-darken-4 "><strong><%= @user.first_name %> <%= @user.last_name %></strong>
+                    <i class="material-icons right">close</i>
+                </span>
+                <!-- <p>Here is some more information about this product that is only revealed once clicked on.</p> -->
+                <p class="card-text">
+                    following: <%= @user.following.length %>
+                    <br>
+                    followers: <%= @user.followers.length %>
+                    <br>
+                    User Name: <%= @user.user_name %>
+                    <br>
+                    First Name: <%= @user.first_name%>
+                    <br>
+                    Last Name: <%= @user.last_name%>
+                    <br>
+                    Email Address: <%= @user.email %>
+                </p>
 
-                                <% if @user.id != current_user.id %> 
-                                    <form action="#" class="text-right">
-                                        <input type="submit" value="Follow User" class="btn btn-primary">
-                                    </form>
-                                <% else %>
-                                    <form action="#" class="text-right">
-                                        <input type="hidden" value="Follow User" class="btn btn-primary">
-                                    </form>
-                                <% end %>
-                            </div>
+                <div class="row-align-center">
+                    <% if @user.id != current_user.id %> 
+                        <form action="/users/<%= @user.id %>/edit" class="text-right">
+                            <input type="hidden" value="Edit Profile" class="btn btn-primary">
+                        </form>
+                        <% else %>
+                        <form action="/users/<%= @user.id %>/edit" class="text-right">
+                            <input type="submit" value="Edit Profile" class="btn btn-primary">
+                        </form>
+                    <% end %>
+
+                    <% if @user.id != current_user.id %> 
+                        <form action="#" class="text-right">
+                            <input type="submit" value="Follow User" class="btn btn-primary">
+                        </form>
+                    <% else %>
+                        <form action="#" class="text-right">
+                            <input type="hidden" value="Follow User" class="btn btn-primary">
+                        </form>
+                    <% end %>
                 </div>
             </div>
-        
+        </div>
+    </div>
 
-        <div class="col-md-8">
-            <% @user.posts.each do |post| %>
-            <!--Panel-->
-                <div class="card card-block">
-                    <h3 class="card-title"><%= post.title %></h3>
-                    <p class="card-text"><%= post.post_text %></p>
-                    <div class="flex-row">
-                        <a href="/posts/<%= post.id %>" class="card-link">Read more</a>
-                        
+
+            <div class="col s12 m8">
+        <% @user.posts.each do |post| %>
+                <div class="card blue-grey lighten-5">
+                    <div class="card-content black-text">
+                        <span class="card-title"><%= post.title %></span>
+                        <p class="card-text"><%= post.post_text %></p>
+                        <div class="flex-row">
+                            <a href="/posts/<%= post.id %>" class="card-link">Read more</a>
+                        </div>
                     </div>
                 </div>
+        <% end %>
+            </div>
+</div>
 
-            <% end %>
-        </div>
-</div>
-    </div> <!-- End of row -->
-</div>
+<!-- </div> -->
+
 
 
 

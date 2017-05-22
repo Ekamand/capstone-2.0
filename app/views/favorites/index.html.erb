@@ -1,21 +1,31 @@
-<% @favorites.each do |favorite| %>
-	<div class="well">
-	<div class="right-float">
-		<%= form_tag "/favorites/#{favorite.id}", method: :delete,
-						data: {confirm: "Are you sure?"} do %> 
-			<button type="submit" class="btn btn-danger glyphicon glyphicon-remove"></button>
+<div class="container">
+<div class="col s12 m2">
+	<!-- <h2 class="header">some text for header</a></h2> -->
+	<div class="card horizontal hoverable">
+
+		<div class="card-stacked">
+			<div class="card-content">
+				<% @favorites.each do |favorite| %>
+
+				<%= form_tag "/favorites/#{favorite.id}", method: :delete,
+				data: {confirm: "Are you sure?"} do %> 
+				<button type="submit" class="btn btn-primary"></button>
 				<!-- <input type="submit" class="btn btn-danger glyphicon glyphicon-remove" value="Remove Favorite"> -->
 			</button>
-		<% end %>
+			<% end %>
 		</div>
 		<br>
-	<!-- <br /> -->
-	Post Title: <a href="posts/<%= favorite.post.id %>"><%= favorite.post.title %></a>
-	<br />
-	Post Text: <%= favorite.post.post_text %>
-	<br />
-	Written By: <%= favorite.user.first_name %>
+		<!-- <br /> -->
+		Post Title: <a href="posts/<%= favorite.post.id %>"><%= favorite.post.title %></a>
+		<br />
+		Post Text: <%= favorite.post.post_text %>
+		<br />
+		Written By: <%= favorite.user.first_name %>
 
 
-		</div>
-<% end %>
+	</div>
+	<% end %>
+</div>
+</div>
+</div>
+</div>

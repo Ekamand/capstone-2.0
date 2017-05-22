@@ -1,88 +1,142 @@
+<div class="container">
+	<div class="row">
+		<div class="col s12 m8">
+			<div class="card ">
+				<div class="card-content black-text">
 
-<div class="page-container">
-<!-- <div class="right-float"> -->
-	<div class="chip">
-		<table>
-			<tr>
-				<% if current_user %>
-					<%= form_tag "/favorites", method: :post do %>
-						<input type="hidden" name="input_post_id" value="<%= @post.id %>">
-					<!-- <button type="submit" class="btn btn-success fa fa-heart"> -->
-						<button type="submit" value="Add to favorites" class="btn btn-success glyphicon glyphicon-heart">
-							<!-- <span class="fa fa-heart" aria-hidden="true"></span> -->
-						</button>
-					<% end %>
-				<% end %>
+					<span class="card-title"><%= @post.title %></span>
+					<h5>Ingredients:</h5> 
+					<p><%=@post.ingredients %></p>
+					<h5>Details:</h5> 
+					<p><%= @post.post_text %></p>
+					<br>
+					Author: <%= @post.user.first_name %>
+					<br>
+					Created: <%= @post.created_at.strftime("%m/%d/%y-%I:%M%p") %>
+					<br>
+					<div class="divider"></div>
+					<!-- FAVORITES EDIT AND DELETE BUTTONS -->
+					<div class="row">
+						<div class="col s12 m6">
+							<% if current_user %>
+							<%= form_tag "/favorites", method: :post do %>
+							<input type="hidden" name="input_post_id" value="<%= @post.id %>">
+							<!-- <button type="submit" class="btn btn-success fa fa-heart"> -->
+							<button type="submit" value="Add to favorites" class="btn btn-primary">Add to Favorites
+								<!-- <span class="fa fa-heart" aria-hidden="true"></span> -->
+							</button>
+							<% end %>
+							<% end %>
 
-				<% if current_user && current_user.admin%>
-					<%= form_tag "/posts/#{@post.id}", method: :delete,
-								data: {confirm: "Are you sure?"} do %> 
-						<button type="submit" class="btn btn-danger glyphicon glyphicon-trash" >
-			  				<!-- <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> -->
-						</button>
-					<% end %>
-				<% end %>
+							<% if current_user && current_user.admin%>
+							<%= form_tag "/posts/#{@post.id}", method: :delete,
+							data: {confirm: "Are you sure?"} do %> 
+							<button type="submit" class="btn btn-primary" > Delete
+								<!-- <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> -->
+							</button>
+							<% end %>
+							<% end %>
 
-					<% if current_user %>
-						<a type="submit"  href="/posts/<%= @post.id %>/edit" 
-								class="btn btn-warning glyphicon glyphicon-edit"></a>
-				<% end %>
-			</tr>
-		</table>
+							<% if current_user %>
+							<a type="submit"  href="/posts/<%= @post.id %>/edit" 
+								class="btn btn-primary">Edit</a>
+								<% end %>
+							</div>
+						</div>
+						<!-- ******************** -->
 
-		<!-- Post Id:<%= @post.id %> -->
-		<td><h2><%= @post.title %></h2></td>
-		<h3>Ingredients:</h3> <h5><%=@post.ingredients %></h5>
-		<h3>Details:</h3><h5> <%= @post.post_text %></h5>
-		<br>
-		Author: <%= @post.user.first_name %>
-		<br>
-		Created: <%= @post.created_at.strftime("%m/%d/%y-%I:%M%p") %>
-		<br>
+
+					</div>
+				</div>
+			</div>
+
+			 <div class="col s12 m4">
+				<div id="map"></div>
+				<!-- some text -->
+				<script>
+					function initMap() {
+						var uluru = {lat: <%= @latlng[0] %> , lng: <%= @latlng[1] %>};
+						var map = new google.maps.Map(document.getElementById('map'), {
+							zoom: 2,
+							center: uluru
+						});
+						var marker = new google.maps.Marker({
+							position: uluru,
+							map: map
+						});
+					}
+				</script>
+				<script async defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATBeIQ6unhuaN_QXnMHZTEHmVDuJ6YCO0&callback=initMap">
+			</script>
+			 </div>
+			<div id="country">
+			 <% @data_url= @latlng[0] %> <% @data_url2= @latlng[1] %>
+			</div>
+
+			
+
 
 	</div>
 
-	<div class="chip">
-		<h2>Comments:</h2>
-		<h4> <%=@comments.length %> Comments </h4>
-		<h3> Add Comment </h3>
 
-		<!-- COMMENTS INPUT -->
-		<div class="row col-md-12">
-			<div class="col-md-4">
-			<a href="/users/1">
-				<div class="avatar">
-		    	<img src="<%= @post.user.photo %>" alt="Contact Person" 
-		    		class="rounded-circle img-responsive"> <%= @post.user.first_name %>
-		    </div>
-		    </a>
-		    </div>
-		    </a>
-		    
-		    <div class="col-md-8">
-			 	<%= form_tag "/comments", method: :post do %>
-					<!-- Comment Text:  -->
-					<input type="hidden" class="form-control" value="<%= @post.id %>" name="input_post_id">
-					<br>
+	<!-- COMMENTS -->
+	<div class="col s12 m2">
+		<div class="card">
+			<div class="card-content black-text">
+				<h5>Comments:</h5>
 
-					<input type="text" class="form-control" placeholder="Join the Discussion" name="input_post_comment">
-					<!-- <button type="submit" class="btn btn-success" onclick="window.location.reload()">Comment</button> -->
-					<button class="btn btn-success" onclick="window.location.reload()">Comment</button>
-				<% end %>
-				<br>
+
+				<div class="section">
+					<div class="row">
+
+						<div class="col m2 hoverable">
+							<a href="/users/<%= @post.user.id %>">
+								<img src="<%= @post.user.photo %>" alt="Contact Person" 
+								class="circle responsive-img"">
+							</a>
+						</div>
+
+						<div class="col m8">
+							<%= form_tag "/comments", method: :post do %>
+							<!-- Comment Text:  -->
+							<input type="hidden" class="form-group" value="<%= @post.id %>" name="input_post_id">
+							<br>
+
+							<input type="text" class="form-group" placeholder="Join the Discussion" name="input_post_comment">
+							<!-- <button type="submit" class="btn btn-success" onclick="window.location.reload()">Comment</button> -->
+							<button class="btn btn-success" onclick="window.location.reload()">Comment</button>
+							<% end %>
+						</div>
+
+					</div>
+
+					<h6> <%=@post.comments.length %> Comments </h6>
+
+					<% @post.comments.each do |comment| %>
+					<div class="row">
+						<%= comment.comment_text %>
+						<div class="divider"></div>
+					</div>
+					<% end %>
+				</div>
+				<!-- END COMMENTS -->
+
 			</div>
 		</div>
-				<!-- <input type="submit" class="btn btn-success" value="Comment" v-on:click="comment"> -->
-		<!-- / COMMENTS INPUT -->
-
-			<% @post.comments.each do |comment| %>
-				<div class="comments_div-p-2" id="comments_div">
-					<%= comment.comment_text %>
-				</div>
-			<% end %>
 	</div>
 </div>
 
+<style>
+	#map {
+		height: 400px;
+		width: 400px;
+	}
 
+</style>
+
+
+<!-- GOOGLE MAPS API KEY -->
+<!-- AIzaSyATBeIQ6unhuaN_QXnMHZTEHmVDuJ6YCO0  -->
 
 

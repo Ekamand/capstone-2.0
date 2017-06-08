@@ -3,7 +3,27 @@ class PostsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show, :search]
 
 	def feed
-		# @following = User.following
+		@posts = []
+		# 1. Grab the people current_user is following
+		@following = current_user.following.all
+
+		# 2. For each 'following', grab that user's posts
+		@following.each do |following|
+			# Get user from the following instance
+			user = following.user
+
+			# Grab the posts of the user, and put into our array
+			user.posts.each do |post|
+				@posts << post
+			end
+		end
+
+		@posts.sort_by{ |post| post[:created_at] }.reverse
+	end
+
+	def post_map
+
+		render 'posts_map'
 	end
 
 	def index
@@ -17,13 +37,13 @@ class PostsController < ApplicationController
 		@post = Post.new(title: params[:input_title],
 							post_text: params[:input_text],
 							ingredients: params[:input_ingredients],
-							user_id: params[:user_id], origin: params[:input_origin])
+							user_id: params[:user_id],
+							origin: params[:input_origin],
+							directions: params[:input_directions])
 
 
 		if @post.save
 		  		flash[:success] = "Post created successfully!"
-		  		puts "post saved **********"
-		  		puts @post.id
 		  	if params[:img_url]
 					@image = Image.create(img_url: params[:img_url], post_id: @post.id)
 			end
@@ -58,14 +78,14 @@ class PostsController < ApplicationController
 	end
 
 	def edit	
-		if !(current_user)
-		redirect_to "/"
-		else
+		# if !(current_user)
+		# redirect_to "/"
+		# else
 		post_id = params[:id]
 		@post = Post.find_by(id: post_id)
 		end
 
-	end
+	# end
 
 	def update
 		post_id = params[:id]
@@ -74,16 +94,19 @@ class PostsController < ApplicationController
 		@post.update(title: params[:input_title],
 							post_text: params[:input_text],
 							ingredients: params[:input_ingredients],
-							user_id: params[:user_id], origin: params[:input_origin])
-		puts "*" *5 + " post updated"
+							user_id: params[:user_id],
+							origin: params[:input_origin],
+							directions: params[:input_directions])
+		# puts "*" *5 + " post updated"
 		@image.update(img_url: params[:img_url])
-		puts "*" *5 + " image updated"
+		# puts "*" *5 + " image updated"
 		if @post.save && @image.save
 		  		flash[:success] = "Post updated successfully!"
 		  		redirect_to "/posts/#{@post.id}"
 		 	else
 		  		flash[:danger] = "item could not be updated!"
 		  		# render "new.html.erb"
+		  		
 		end
 	end
 
@@ -100,6 +123,26 @@ class PostsController < ApplicationController
 		search_term = params[:search_term]
 		@posts = Post.where("title ILIKE?", "%#{search_term}%")
 		render :index
+	end
+
+
+	def region_show
+		@posts = []
+		@region = params[:name]
+		@region_countries = Post.countries(@region.to_s)
+		# puts @region
+		# puts @region_countries
+		@region_countries.each do |country|
+
+
+			@country_posts = Post.where(origin: country)
+
+			@country_posts.each do |post|
+				@posts << post
+			end
+		# @contry = Post.where(region: '%#{@region.countries}')
+
+		end
 	end
 
 

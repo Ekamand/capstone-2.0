@@ -1,31 +1,52 @@
 <div class="container">
-<div class="col s12 m2">
-	<!-- <h2 class="header">some text for header</a></h2> -->
-	<div class="card horizontal hoverable">
+	<% @favorites.each do |favorite| %>
 
-		<div class="card-stacked">
-			<div class="card-content">
-				<% @favorites.each do |favorite| %>
+<div id="each-post" > 
+                <div class="col s12 m12 l6">
+                  <!-- <h2 class="header">some text for header</a></h2> -->
+                  <div class="card horizontal">
+                  <div class="homepage-card-bg">
+                  </div>
 
-				<%= form_tag "/favorites/#{favorite.id}", method: :delete,
-				data: {confirm: "Are you sure?"} do %> 
-				<button type="submit" class="btn btn-primary"></button>
-				<!-- <input type="submit" class="btn btn-danger glyphicon glyphicon-remove" value="Remove Favorite"> -->
-			</button>
-			<% end %>
-		</div>
-		<br>
-		<!-- <br /> -->
-		Post Title: <a href="posts/<%= favorite.post.id %>"><%= favorite.post.title %></a>
-		<br />
-		Post Text: <%= favorite.post.post_text %>
-		<br />
-		Written By: <%= favorite.user.first_name %>
+                    <div class="card-image">
 
 
-	</div>
+                      <img id="post-img" src="<%= favorite.post.grab_image %>">
+                    </div>
+
+                    <div class="card-stacked">
+                      <div class="card-content">
+                        <p class="header pull center"><a href="posts/<%= favorite.post.id %>"><%= favorite.post.title %></a></p>
+
+                        <div class="post_text">
+                          <span>
+                        <p> <%=  truncate(favorite.post.post_text, :length => 40) %></p>
+                        </span>
+                        </div>
+
+                      </div>
+                    
+                      <div class="card-action center">
+                        <!-- <a href="#">This is a link</a> -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/54/Blank_Canvas_on_Transparent_Background.png" class="pull left flag flag-<%= favorite.post.country_code.downcase %>" alt="<%= favorite.post.origin %>" />
+
+                          <div class="chip pull center">
+                            <img src="<%= favorite.post.user.photo %>" alt="Contact Person">
+                            <a href="/users/<%= favorite.post.user.id %>"><%= favorite.post.user.first_name %> <%= favorite.post.user.last_name %></a>
+                          </div>
+
+                               <span class="glyphicon glyphicon-comment pull right"><%= favorite.post.comments.length %></span>
+
+                               		<%= form_tag "/favorites/#{favorite.id}", method: :delete,
+			data: {confirm: "Are you sure?"} do %> 
+			<button type="submit" class="btn btn-primary">Remove</button>
+		<% end %>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
 	<% end %>
-</div>
-</div>
-</div>
 </div>

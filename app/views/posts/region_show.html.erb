@@ -1,9 +1,7 @@
-<center><h2> Feed Page </h2></center>
-<div class="container">
+	<div class="container">
 	<% @posts.each do |post| %>
-	<!-- <p> <%= post.title %>  - <%= post.user.first_name %> - <%= post.created_at %> </p> -->
 
-	              <div id="each-post" > 
+              <div id="each-post" > 
                 <div class="col s12 m12 l6">
                   <!-- <h2 class="header">some text for header</a></h2> -->
                   <div class="card horizontal">
@@ -16,7 +14,7 @@
 
                     <div class="card-stacked">
                       <div class="card-content">
-                        <p class="header pull center"><a href="posts/<%= post.id %>"><%= post.title %></a></p>
+                        <p class="header pull center"><a href="/posts/<%= post.id %>"><%= post.title %></a></p>
 
                         <div class="post_text">
                           <span>
@@ -50,7 +48,5 @@
               </div>
 
 
-
-	<% end %>
+<% end %>
 </div>
-

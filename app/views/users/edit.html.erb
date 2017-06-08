@@ -1,55 +1,51 @@
-<div class="flex-center animated fadeIn">
-  <div class="col-md-4 ">
-    <div class="card card-cascade ">
-      <!-- <div class="container">  -->
-      <div class="card-block text-left">
+<div class="container">
+
+  <div class="col s12 m12 l12 ">
+  <div class="card">
+<div class="card-content black-text">
 
 
       <%= form_tag "/users/#{@user.id}", method: :patch do  %>
 
-        <div class="md-form">
-          <input type="text" name="input_first_name" value="<%= @user.first_name %>" id="form1">
-          <label for="form1" class="">First Name</label>
-        </div>
 
-        <div class="md-form">
-          <input type="text" name="input_last_name" value="<%= @user.last_name %>" id="form2">
-          <label for="form2" class="">Last Name</label>
-        </div>
-<!--   <div>
-First Name:
-<input type="text" name="input_first_name" value="<%= current_user.first_name %>">
-</div> -->
-<!--     <div>
-Last Name:
-<input type="text" name="input_last_name" value="<%= current_user.last_name %>">
-</div> -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input value="<%= @user.first_name %>" id="input_first_name" type="text" name="input_first_name">
+              <label for="input_first_name">First Name:</label>
+            </div>
+          </div>
 
-<div class="md-form">
-  <input type="text" name="input_last_name" value="<%= @user.email %>" id="form3">
-  <label for="form3" class="">Email Address</label>
-</div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input value="<%= @user.last_name %>" id="input_last_name" type="text" name="input_last_name">
+              <label for="input_last_name">Last Name:</label>
+            </div>
+          </div>
 
-<!--   <div>
-Email:
-<input type="email" name="input_email" value="<%= current_user.email %>">
-</div> -->
-<div class="md-form">
-  <input type="text" name="input_last_name" value="<%= @user.photo %>" id="form4">
-  <label for="form4" class="">Photo URL</label>
-</div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input value="<%= @user.email %>" id="input_email" type="text" name="input_email">
+              <label for="input_email">Email Address:</label>
+            </div>
+          </div>
 
-<div class="md-form">
-  <input type="text" name="Input_bio" value="Bio Place holders" id="form5">
-  <label for="form5" class="">Bio</label>
-</div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input value="<%= @user.photo %>" id="input_photo" type="text" name="input_photo">
+              <label for="input_photo">Photo URL:</label>
+            </div>
+          </div>
 
-<!--     <div>
-Photo URL:
-<input type="email" name="input_profile_img_url" value="<%= current_user.photo %>">
-</div> -->
 
-<input type="submit" value="Submit">
+          <div class="row">
+            <div class="input-field col s12">
+              <input value="Short Bio" id="input_bio" type="text" name="input_bio">
+              <label for="input_bio">Short Bio:</label>
+            </div>
+          </div>
+        <center><input type="submit" class="btn btn-primary" value ="Submit" ></center>
+
+<!-- <input type="submit" value="Submit"> -->
 <% end %>
 </div>
 </div>

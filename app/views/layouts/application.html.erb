@@ -2,24 +2,25 @@
 <html>
 <head>
 <!--   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+      integrity=" sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+<link rel="stylesheet" href="/stylesheets/flags.css" %>
 
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<% content_for :posts_map do %>
+  <%= stylesheet_link_tag 'posts_map', media: 'all' %>
+<% end %>
+<!-- <link rel="stylesheet" href="/application.css"> -->
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+<title>CapstoneProject</title>
 
-  <!-- Compiled and minified JavaScript -->
-  
+<%= csrf_meta_tags %>
 
-  <!-- <%= stylesheet_link_tag "/stylesheets/application.css" %> -->
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-  <title>CapstoneProject</title>
-  <%= csrf_meta_tags %>
-
-  
 </head>
 <!-- <body style="background-image: url('http://encompasshealthcare.com/wp-content/uploads/2013/08/Chinese-Herbs.jpg')"> -->
 <body>
@@ -28,37 +29,56 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 
 
+    <!-- 
   <!-- Dropdown Structure -->
   <ul id="dropdown1" class="dropdown-content">
     <% if current_user %> 
     <li><a href="/users/<%= current_user.id %>">My Profile</a></li>
     <li><a href="/users/<%= current_user.id %>/followings">Following</a></li>
     <% end %>
+
     <li class="divider"></li>
+
     <% if current_user %> 
     <li><a href="/logout">Logout</a></li>
     <% else %>
     <li><a href="/login">Login</a></li>
     <% end %>
-
   </ul>
 
 
-  <div class="navbar-fixed">
-
-    <nav>
-      <div class="blue-grey darken-2 nav-wrapper">
-        <a href="#!" class="brand-logo">Logo</a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="/index">Home</a></li>
-          <li><a href="/posts/new">New</a></li>
-          <li><a href="/favorites">favorites</a></li>
-          <!-- Dropdown Trigger -->
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-        </ul>
-      </div>
-    </nav>
+    <div class="navbar-fixed">
+      <nav>
+          <div class="blue-grey darken-2 nav-wrapper">
+            <a href="/index" class="brand-logo">Remedy Finder</a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="/index">Home</a></li>
+              <li><a href="/posts_map">Post Map</a></li>
+              <li><a href="/feed">Posts Feed</a></li>
+              <!-- <li><a href="/favorites">Favorites</a></li> -->
+              <li> <a href="/favorites">
+                <span class="glyphicon glyphicon-heart " aria-hidden="true"></span>
+              </a></li>
+              <% if current_user %>
+              <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Profile<i class="material-icons right">arrow_drop_down</i></a></li>
+              <% else %>
+              <li><a href="/login">Login/Signup</a></li>
+              <% end %>
+            </ul>
+          </div>
+      </nav>
   </div>
+
+
+
+  
+
+
+
+
+
+
+
 
 
 
@@ -72,31 +92,7 @@
     </a>
   </div>
 
-  <footer class="page-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Footer Content</h5>
-          <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-        </div>
-        <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">Links</h5>
-          <ul>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-        © 2014 Copyright Text
-        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-      </div>
-    </div>
-  </footer>
+<!--  -->
 
 </body>
 </html>

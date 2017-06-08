@@ -1,91 +1,67 @@
-
-<div class="row center">
-  <div class="col s12 m8">
-    <div class="card white-grey">
-      <div class="card-content black-text">
-            <% if @post.errors.any? %>
+<div class="container">
+  <div class="card">
+    <div class="card-content black-text">
+      <% if @post.errors.any? %>
       <div>
-      <%= pluralize(@post.errors.count, "error") %>
-      <ul>
-       <% @post.errors.full_messages.each do |error| %>
-      <li> <%= error %></li>
+        <%= pluralize(@post.errors.count, "error") %>
+        <ul>
+          <% @post.errors.full_messages.each do |error| %>
+          <li> <%= error %></li>
 
-  <% end %> 
-  </ul>
-  </div>
-  <% end %>
+          <% end %> 
+        </ul>
+      </div>
+      <% end %>
 
-        <span class="card-title">Card Title</span>
-        <%= form_tag "/posts", method: :post do %>
+      <center><span class="card-title">New Post</span></center>
+      <%= form_tag "/posts", method: :post do %>
 
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="input_title" type="text"  name="input_title">
-            <input type="hidden" class="form-control"  name="user_id" value="<%= current_user.id %>">
-            <label for="input_title">Post Title:</label>
-          </div>
-        </div>
-
-        <div class="row">
-              <div class="input-field col s12">
-                <textarea id="input_text" type="text" class="materialize-textarea" name="input_text"></textarea>
-                <label for="input_text">Details:</label>
-              </div>
-            </div>
-          
-            <div class="row">
-              <div class="input-field col s12">
-                <textarea id="input_ingredients" type="text" class="materialize-textarea" name="input_ingredients"></textarea>
-                <label for="input_ingredients">Ingredients:</label>
-              </div>
-            </div>
-          
-                <div class="row">
-              <div class="input-field col s12">
-                <textarea id="input_directions" type="text" class="materialize-textarea" name="input_directions"></textarea>
-                <label for="input_directions">Directions:</label>
-              </div>
-            </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="img_url" type="text" name="img_url">
-            <label for="img_url">Image URL:</label>
-          </div>
-        </div>
-
-                <div class="row">
-          <div class="input-field col s12">
-            <input id="input_origin" type="text" name="input_origin">
-            <label for="input_origin">Origin:</label>
-          </div>
-        </div>
-
-            </div>
-            <div class="card-action">
-                <center><button type="submit" class="btn waves-effect waves-light" value ="Add Item" >Submit
-                  <i class="material-icons right">send</i>
-                  </button>
-                  </center>
-                   <% end %>
-              <!-- <a href="#">This is a link</a> -->
-            </div>
-          </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="title_form" type="text" name="input_title">
+          <label for="title_form">Title:</label>
         </div>
       </div>
 
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea  id="post_text_form" type="text" name="input_text" class="materialize-textarea"></textarea>
+          <label for="post_text_form">Details:</label>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="ingredients_form" type="text" name="input_ingredients" class="materialize-textarea"></textarea>
+          <label for="ingredients_form">Ingredients:</label>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="directions_form" type="text" name="input_directions" class="materialize-textarea"></textarea>
+          <label for="directions_form">Directions:</label>
+        </div>
+      </div>
 
+      <input id="hidden" name="user_id" type="hidden" value = "<%= current_user.id %>">
 
+      <div class="row">
+        <div class="input-field col s12">
+          <input  id="input_origin" type="text" name="input_origin">
+          <label for="input_origin">Origin:</label>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="input-field col s12">
+          <input  id="img_url" type="text" name="img_url">
+          <label for="img_url">Image URL:</label>
+        </div>
+      </div>
 
-
-
-
-
-
-
-
-
-
+      <center><input type="submit" class="btn btn-primary" value ="Save" ></center>
+      <% end %>
+    </div>
+  </div>
+</div>

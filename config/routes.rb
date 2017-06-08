@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 	get "/posts/:id" => "posts#show"
 	# get "/users/:id/posts" => ""
 	get "/feed" => "posts#feed"
+
+	get "/posts_map" => "posts#post_map"
+	get "/region/:name" => "posts#region_show"
+
 	get "/signup" => "users#new"
 
 	
